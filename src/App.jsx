@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,9 +13,16 @@ import FineTune from './components/FineTune';
 import AugmentData from './components/AugmentData';
 import Header from './components/Header';
 
+import settings from '../settings.json'
+import { projectsSetServer } from './store/sliceProjects';
+
 function App() {
   const dispatch = useDispatch();
   const count = useSelector(state => state.counter)
+
+  useEffect(() => {
+    dispatch(projectsSetServer(settings?.server));
+  }, [])
   return (
     <div className="App">
       <Header />

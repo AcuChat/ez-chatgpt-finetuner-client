@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './sliceCounter';
+import projectsReducer from './sliceProjects';
 
 export const store = configureStore({ 
     reducer: {
-      counter: counterReducer
+      projects: projectsReducer
     }
 });
 
