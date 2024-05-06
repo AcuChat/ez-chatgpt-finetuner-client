@@ -6,17 +6,52 @@
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
+h1 {
+  text-align: center;
+  line-height: 4rem !important;
+  margin-bottom: .5rem;
+}
+input, textarea {
+  display: block;
+  padding: .25rem .5rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 100%;
+  margin-top: .5rem;
+}
+
+.button {
+  width: 5rem;
+  text-align: center;
+  padding: .25rem .5rem;
+  color: white;
+  background-color: black;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: .5rem auto;
+
+}
+.button-outline {
+  width: 5rem;
+  padding: .25rem .5rem;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
 .App {
   height: 100vh;
   width: 100vw;
 }
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+
 
 .logo {
   height: 6em;

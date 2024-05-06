@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import lodash from 'lodash';
 
 const initState = {
-    server: ''
+    server: '',
+    newProject: {}
 }
 
 const sliceProjects = createSlice({
@@ -11,10 +13,16 @@ const sliceProjects = createSlice({
         projectsSetServer: (state, action) => {
             state.server = action.payload;
             return state;
+        },
+        projectsSetNewProject: (state, action) => {
+            for (const [key, value] of Object.entries(action.payload)) {
+                state.newProject[key] = value;
+            }
+            return state;
         }
     }
 });
 
-export const { projectsSetServer } = sliceProjects.actions;
+export const { projectsSetServer, projectsSetNewProject } = sliceProjects.actions;
 
 export default sliceProjects.reducer;
