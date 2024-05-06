@@ -3,6 +3,9 @@ import React, {useCallback, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsSetNewProject } from '../store/sliceProjects';
 import Dropzone, {useDropzone} from 'react-dropzone'
+import axios from 'axios';
+
+import settings from '../../settings.json'
 
 function Create() {
   const [ file, setFile ] = useState(null);
@@ -26,14 +29,32 @@ function Create() {
     setFile(acceptedFiles[0])
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!file) return alert("Error: missing file");
     if (!projectInfo?.newProject?.name) return alert ("Error: missing project name");
     const systemPrompt = projectInfo?.newProject?.systemPrompt ? projectInfo.newProject.systemPrompt : '';
     const userPrompt = projectInfo?.newProject?.userPrompt ? projectInfo.newProject.userPrompt : '';
     if (!userPrompt && !systemPrompt) return alert ("Error: must provide system prompt or user prompt");
 
-
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('name', projectInfo.newProject.name);
+    formData.append('model', projectInfo.newProject.model);
+    formData.append('systemPrompt', systemPrompt);
+    formData.append('userPrompt', userPrompt);
+    formData.append(`file1`, file);
+  
+    try {
+      // Send form data to the server
+      const response = await axios.post(settings.server + '/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error uploading files: ', error);
+    }
   }
 
   useEffect(() => {
@@ -62,6 +83,8 @@ function Create() {
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   <p>Drag 'n' drop some files here, or click to select files</p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
                 </div>
               </section>
             )}
