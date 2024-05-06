@@ -10,9 +10,18 @@ function Create() {
   return (
     <div className='Create'>
       <h1>Create</h1>
-      <input type="text" placeholder='Project Name' value={projectInfo?.newProject?.name ? projectInfo.newProject.name : ''} onChange={(e) => dispatch(projectsSetNewProject({name: e.target.value}))}/>
-      <textarea placeholder='System Prompt' rows={10}/>
-      <input type="text" placeholder='Prepended User Prompt'/>
+      <input type="text" placeholder='Project Name' 
+        value={projectInfo?.newProject?.name ? projectInfo.newProject.name : ''} 
+        onChange={(e) => dispatch(projectsSetNewProject({name: e.target.value}))}
+      />
+      <textarea placeholder='System Prompt' rows={10}
+        value={projectInfo?.newProject?.systemPrompt ? projectInfo.newProject.systemPrompt : ''} 
+        onChange={(e) => dispatch(projectsSetNewProject({systemPrompt: e.target.value}))}
+      />
+      <input type="text" placeholder='Prepended User Prompt'
+        value={projectInfo?.newProject?.userPrompt ? projectInfo.newProject.userPrompt : ''} 
+        onChange={(e) => dispatch(projectsSetNewProject({userPrompt: e.target.value}))}
+      />
       <div className="Create__dropzone">
         Drop Zone
       </div>
