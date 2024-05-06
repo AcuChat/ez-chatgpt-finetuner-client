@@ -11,13 +11,14 @@ import Create from './components/Create';
 import Edit from './components/Edit';
 import FineTune from './components/FineTune';
 import AugmentData from './components/AugmentData';
+import Header from './components/Header';
 
 function App() {
   const dispatch = useDispatch();
   const count = useSelector(state => state.counter)
   return (
     <div className="App">
-   <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
@@ -25,7 +26,7 @@ function App() {
         <Route path="/finetune" element={<FineTune />} />
         <Route path="/augment-data" element={<AugmentData />} />
       </Routes>
-    </Router>
+   
   </div>
   )
 }
