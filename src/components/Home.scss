@@ -1,0 +1,16 @@
+.Home {
+
+
+    &__add-project {
+        display: flex;
+        align-items: center;
+    }
+    &__add-button {
+        cursor: pointer;
+    }
+    &__right-label {
+        font-size: 1.25rem;
+        margin-left: .25rem;
+    }
+
+}
