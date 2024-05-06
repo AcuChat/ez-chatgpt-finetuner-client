@@ -3,5 +3,19 @@
     max-width: 1200px;
     margin: auto;
     
+    &__dropzone {
+        width: 100%;
+        height: 6rem;
+        border: 1px solid black;
+        border-radius: 4px;
+        margin-top: .5rem;
+        padding: .5rem 1rem;
+        text-align: center;
+        cursor: pointer;
+    }
+    &__filename {
+        text-align: center;
+        margin: .5rem 0;
+    }
 }
 

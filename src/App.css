@@ -21,6 +21,17 @@ input, textarea {
   width: 100%;
   margin-top: .5rem;
 }
+select {
+  width: 12rem;
+  padding: .5rem .75rem;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 1rem auto 1rem auto;
+  display: block;
+  cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
 
 .button {
   width: 5rem;
