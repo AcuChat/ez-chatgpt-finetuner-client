@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Create from './components/Create';
 import Edit from './components/Edit';
 import FineTune from './components/FineTune';
+import AugmentData from './components/AugmentData';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/edit" element={<Edit />} />
         <Route path="/finetune" element={<FineTune />} />
+        <Route path="/augment-data" element={<AugmentData />} />
       </Routes>
     </Router>
   </div>
