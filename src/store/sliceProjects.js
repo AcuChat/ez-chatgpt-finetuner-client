@@ -3,7 +3,8 @@ import lodash from 'lodash';
 
 const initState = {
     server: '',
-    newProject: {}
+    newProject: {},
+    projects: []
 }
 
 const sliceProjects = createSlice({
@@ -19,10 +20,14 @@ const sliceProjects = createSlice({
                 state.newProject[key] = value;
             }
             return state;
+        },
+        projectsSetProjects: (state, action) => {
+            state.projects = lodash.cloneDeep(action.payload);
+            return state;
         }
     }
 });
 
-export const { projectsSetServer, projectsSetNewProject } = sliceProjects.actions;
+export const { projectsSetServer, projectsSetNewProject, projectsSetProjects } = sliceProjects.actions;
 
 export default sliceProjects.reducer;
