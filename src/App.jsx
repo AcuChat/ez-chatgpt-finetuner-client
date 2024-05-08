@@ -29,8 +29,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/edit" element={<Edit />} />
-        <Route path="/finetune" element={<FineTune />} />
+        <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/finetune/:id" element={<FineTune />} />
         <Route path="/augment-data" element={<AugmentData />} />
       </Routes>
    

@@ -33,14 +33,40 @@ function Home() {
 
   return (
     <div className='Home'>
-      <h1 className="Home__title">Home</h1>
-      <div className="Home__add-project">
-        <Link to="/create">
-          <IoMdAddCircleOutline className='Home__add-button' size={32} color="black"/>
-        </Link>
-        <div className="Home__right-label">Add Project</div>
+      <h1 className="Home__title">Projects</h1>
+      <div className="Home__projects-container">
+        <div className="Home__add-project">
+          <Link to="/create">
+            <IoMdAddCircleOutline className='Home__add-button' size={32} color="black"/>
+          </Link>
+          <div className="Home__right-label">Add Project</div>
+        </div>
         <div className="Home__projects-list">
-          {}
+            {projectsInfo?.projects.map(pi => {
+              let url = '/';
+              switch (pi.status) {
+                case 'creating':
+                case 'created':
+                  url = `/edit/${pi.project_id}`;
+                  break;
+                case 'edited':
+                  url = `/finetune/${pi.project_id}`;
+                  break;
+                case 'finetuned':
+                  url = `/status/${pi.projectId}`
+                  break;
+              }
+              return (
+                <div className="Home__project" key={pi.project_id}>
+                   <Link to={url}>
+                    <div className="Home__project-button">View</div>
+                  </Link>
+                  
+                  <div className="Home__project-name">{pi.project_name}</div>
+                  <div className="Home__project-status">{pi.status}</div>
+                </div>
+              )
+            })}
         </div>
       </div>
     </div>

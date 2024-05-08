@@ -12,5 +12,35 @@
         font-size: 1.25rem;
         margin-left: .25rem;
     }
+    &__projects-container {
+        width: 100%;
+        max-width: 1200px;
+        display: block;
+        margin: auto;
+    }
+    &__projects-list {
+        margin-top: 1.5rem;
+    }
+    &__project {
+        display: flex;
+        align-items: center;
+        font-size: 1.25rem;
+        padding: .5rem 0;
+        border-bottom: 1px solid black;
+    }
+    &__project-button {
+        margin-right: .5rem;
+        padding: .25rem .5rem;
+        background-color: black;
+        color: white;
+        width: 4rem;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    &__project-name {
+        flex-grow: 1;
+        font-weight: bold;
+    }
 
 }
