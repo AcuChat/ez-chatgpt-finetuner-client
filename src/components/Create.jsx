@@ -35,6 +35,7 @@ function Create() {
     const systemPrompt = projectInfo?.newProject?.systemPrompt ? projectInfo.newProject.systemPrompt : '';
     const userPrompt = projectInfo?.newProject?.userPrompt ? projectInfo.newProject.userPrompt : '';
     if (!userPrompt && !systemPrompt) return alert ("Error: must provide system prompt or user prompt");
+    if (!projectInfo?.newProject?.openAiKey) return alert ("Error: missing OpenAI API Key");
 
     // Prepare form data
     const formData = new FormData();
@@ -43,6 +44,7 @@ function Create() {
     formData.append('systemPrompt', systemPrompt);
     formData.append('userPrompt', userPrompt);
     formData.append(`file1`, file);
+    formData.append('openaiKey', projectInfo.newProject.openAiKey);
   
     try {
       // Send form data to the server
@@ -76,6 +78,11 @@ function Create() {
         value={projectInfo?.newProject?.userPrompt ? projectInfo.newProject.userPrompt : ''} 
         onChange={(e) => dispatch(projectsSetNewProject({userPrompt: e.target.value}))}
       />
+      <input type="password" placeholder='OpenAI API Key'
+        value={projectInfo?.newProject?.openAiKey ? projectInfo.newProject.openAiKey : ''} 
+        onChange={(e) => dispatch(projectsSetNewProject({openAiKey: e.target.value}))}
+      />
+
       {!file && <div className="Create__dropzone">
           <Dropzone onDrop={acceptedFiles => droppedFiles(acceptedFiles)}>
             {({getRootProps, getInputProps}) => (
