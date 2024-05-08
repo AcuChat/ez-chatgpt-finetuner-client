@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import lodash from 'lodash';
 
 function Edit() {
-  const [ input, setInput ] = useState('');
-  const [ output, setOutput ] = useState('');
+  const [ data, setData ] = useState(null)
 
   const { id } = useParams();
   const projects = useSelector(state => state?.projects?.projects);
@@ -18,6 +18,8 @@ function Edit() {
 
   const getInput = async () => {
     if (!server) return;
+    if (!project) return;
+
     const request = {
       url: server + "/nextAvailablePair",
       method: 'post',
@@ -28,24 +30,41 @@ function Edit() {
 
     const response = await axios(request);
 
-    const input = response.data.input;
-
-    setInput(input.startsWith('"') ? JSON.parse(input) : input);
-    setOutput(response.data.orig_output);
+    setData(response.data);
     
   }
+
+  const handleSubmit = async () => {
+    const request = {
+      url: server + '/submission',
+      method: 'post',
+      data: {
+        output: data.orig_output,
+        responseId: data.response_id,
+      }
+    }
+
+    const response = await axios(request);
+
+    getInput();
+  }
+
+
   useEffect(() => {
-    if (!input) getInput();
+    if (data === null) getInput();
   })
   
   return (
     <div className='Edit'>
       <h1>Edit</h1>
       <h2 className='Edit__project-name'>{project?.project_name}</h2>
-      <div className="Edit__submit-button">Submit</div>
+      <div className="Edit__submit-button" onClick={handleSubmit}>Submit</div>
       <div className="Edit__editor-container">
-        <div className="Edit__input">{input}</div>
-        <textarea className="Edit__output" value={output} onChange={(e) => setOutput(e.target.value)}/>
+        <div className="Edit__input">{data ? data.input : ''}</div>
+        <textarea className="Edit__output" value={data ? data.orig_output : ''} onChange={(e) => {
+          let origData = lodash.cloneDeep(data);
+          origData.orig_output = e.target.value
+        }}/>
       </div>
     </div>
   )
