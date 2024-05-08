@@ -46,7 +46,7 @@ function Create() {
   
     try {
       // Send form data to the server
-      const response = await axios.post(settings.server + '/upload', formData, {
+      const response = await axios.post(settings.server + '/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
