@@ -6,7 +6,8 @@ import axios from 'axios';
 import lodash from 'lodash';
 
 function Edit() {
-  const [ data, setData ] = useState(null)
+  const [ data, setData ] = useState(null);
+  const [ pairsAvailable, setPairsAvailable ] = useState(true);
 
   const { id } = useParams();
   const projects = useSelector(state => state?.projects?.projects);
@@ -20,7 +21,7 @@ function Edit() {
     if (!server) return;
     if (!project) return;
 
-    const request = {
+    let request = {
       url: server + "/nextAvailablePair",
       method: 'post',
       data: {
@@ -28,10 +29,24 @@ function Edit() {
       }
     }
 
-    const response = await axios(request);
+    let response = await axios(request);
+
+    /**
+     * If no more available pairs 
+     */
 
     if (lodash.isEmpty(response.data)) {
-      alert("Ready to Finetune!");
+      request = {
+        url: server + '/update-project-status',
+        method: 'POST',
+        data: {
+          status: 'edited',
+          projectId: project.project_id
+        }
+      }
+
+      response = await axios(request);
+      setPairsAvailable(false);
     }
 
     setData(response.data);
@@ -58,6 +73,8 @@ function Edit() {
     if (data === null) getInput();
   })
   
+  if (!pairsAvailable) return <Navigate to="/"/>
+
   return (
     <div className='Edit'>
       <h1>Edit</h1>
