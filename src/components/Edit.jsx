@@ -4,6 +4,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import lodash from 'lodash';
+import { projectsSetStatus } from '../store/sliceProjects';
 
 function Edit() {
   const [ data, setData ] = useState(null);
@@ -12,6 +13,8 @@ function Edit() {
   const { id } = useParams();
   const projects = useSelector(state => state?.projects?.projects);
   const server = useSelector(state => state.projects?.server);
+
+  const dispatch = useDispatch();
 
   console.log('projects', projects)
   const project = projects?.find(p => p.project_id === id);
@@ -46,6 +49,10 @@ function Edit() {
       }
 
       response = await axios(request);
+      dispatch(projectsSetStatus({
+        status: 'edited',
+        projectId: project.project_id
+      }))
       setPairsAvailable(false);
     }
 

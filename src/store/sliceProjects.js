@@ -24,10 +24,16 @@ const sliceProjects = createSlice({
         projectsSetProjects: (state, action) => {
             state.projects = lodash.cloneDeep(action.payload);
             return state;
+        },
+        projectsSetStatus: (state, action) => {
+            const { projectId, status } = action.payload;
+            const project = state.projects.find(p => p.project_id === projectId);
+            project.status = status;
+            return state;
         }
     }
 });
 
-export const { projectsSetServer, projectsSetNewProject, projectsSetProjects } = sliceProjects.actions;
+export const { projectsSetServer, projectsSetNewProject, projectsSetProjects, projectsSetStatus } = sliceProjects.actions;
 
 export default sliceProjects.reducer;
