@@ -3,6 +3,7 @@ import './FineTune.scss';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import lodash from 'lodash';
+import axios from 'axios';
 
 function FineTune() {
   const { id } = useParams();
@@ -43,7 +44,23 @@ function FineTune() {
 
   console.log('projects', projects)
   const project = projects?.find(p => p.project_id === id);
-  console.log('options', options)
+  console.log('project', project)
+
+  const handleSubmit = async () => {
+    const request = {
+      url: server + '/finetune',
+      method: 'post',
+      data: {
+        projectId: project.project_id,
+        numEpochs: options.find(option => option.id === '2b592b0cefe998c1432dc000f2ea0dd6').automatic ? 0 : options.find(option => option.id === '2b592b0cefe998c1432dc000f2ea0dd6').value,
+        learningRate: options.find(option => option.id === '2033ff1f82d1d15a630f86893ba70a09').automatic ? 0 : options.find(option => option.id === '2033ff1f82d1d15a630f86893ba70a09').value,
+        batchSize: options.find(option => option.id === '430eae655b6a54082b77f5b51ee3c96e').automatic ? 0 : options.find(option => option.id === '430eae655b6a54082b77f5b51ee3c96e').value,
+      }
+    }
+
+    const response = await axios(request);
+
+  }
 
   return (
     <div className='FineTune'>
@@ -58,15 +75,14 @@ function FineTune() {
               <div className="FineTune__label">{option.label}</div>
               <input type="number" step={option.id === '2033ff1f82d1d15a630f86893ba70a09' ? .1 : 1} className="FineTune__value" value={option.value} onChange={(e) => updateOption(option.id, 'value', e.target.value)}/>
               <input type="checkbox" className="FineTune__checkbox" checked={option.automatic} onChange={(e) => {
-                console.log(e.target.checked)
-                option.automatic = e.target.checked
+                updateOption(option.id, 'automatic', e.target.checked)
               }}/>
               <div className="FineTune__automatic">Automatic</div>
             </div>
           )
         })}
       </div>
-      <div className="FineTune__submit-button">Submit</div>
+      <div className="FineTune__submit-button" onClick={handleSubmit}>Submit</div>
     </div>
   )
 }
