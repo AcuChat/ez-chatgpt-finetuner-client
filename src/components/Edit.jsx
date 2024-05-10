@@ -30,6 +30,10 @@ function Edit() {
 
     const response = await axios(request);
 
+    if (lodash.isEmpty(response.data)) {
+      alert("Ready to Finetune!");
+    }
+
     setData(response.data);
     
   }
@@ -64,6 +68,7 @@ function Edit() {
         <textarea className="Edit__output" value={data ? data.orig_output : ''} onChange={(e) => {
           let origData = lodash.cloneDeep(data);
           origData.orig_output = e.target.value
+          setData(origData);
         }}/>
       </div>
     </div>
