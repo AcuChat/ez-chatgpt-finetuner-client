@@ -12,6 +12,7 @@ import Edit from './components/Edit';
 import FineTune from './components/FineTune';
 import AugmentData from './components/AugmentData';
 import Header from './components/Header';
+import Status from './components/Status'
 
 import settings from '../settings.json'
 import { projectsSetServer } from './store/sliceProjects';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/finetune/:id" element={<FineTune />} />
+        <Route path="/status/:id" element={<Status />} />
         <Route path="/augment-data" element={<AugmentData />} />
       </Routes>
    

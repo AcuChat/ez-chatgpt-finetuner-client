@@ -51,8 +51,8 @@ function Home() {
                 case 'edited':
                   url = `/finetune/${pi.project_id}`;
                   break;
-                case 'finetuned':
-                  url = `/status/${pi.projectId}`
+                case 'finetuning':
+                  url = `/status/${pi.project_id}`
                   break;
               }
               return (
