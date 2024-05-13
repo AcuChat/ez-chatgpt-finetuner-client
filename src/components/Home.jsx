@@ -12,7 +12,7 @@ function Home() {
   
   const dispatch = useDispatch();
   const projectsInfo = useSelector(state => state.projects);
-  const server = useSelector(state => state.server);
+  const server = useSelector(state => state.projects.server);
 
   console.log('projectsInfo', projectsInfo)
 
@@ -38,6 +38,7 @@ function Home() {
 
     try {
       let response = await axios(request);
+      getProjects();
     } catch (err) {
       console.error(err);
     }
@@ -86,7 +87,7 @@ function Home() {
                   
                   <div className="Home__project-name">{pi.project_name}</div>
                   <div className="Home__action-container">
-                  <RiDeleteBinLine color='red' size={24} onClick={() => handleDelete(pi.project_id)}/>
+                    <RiDeleteBinLine className='Home__action-button' color='red' size={24} onClick={() => handleDelete(pi.project_id)}/>
                   </div>
                 </div>
               )

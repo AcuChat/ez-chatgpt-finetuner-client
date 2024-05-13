@@ -42,5 +42,8 @@
         flex-grow: 1;
         font-weight: bold;
     }
+    &__action-button {
+        cursor: pointer;
+    }
 
 }
