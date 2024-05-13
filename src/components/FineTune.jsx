@@ -62,7 +62,7 @@ function FineTune() {
 
     try {
       const response = await axios(request);
-
+      setFineTuning(true);
     } catch (err) {
       console.error(err);
     }
