@@ -43,22 +43,27 @@ function Home() {
         <div className="Home__projects-list">
             {projectsInfo?.projects.map(pi => {
               let url = '/';
+              let buttonName = 'View';
+
               switch (pi.status) {
                 case 'creating':
                 case 'created':
                   url = `/edit/${pi.project_id}`;
+                  buttonName = 'Edit';
                   break;
                 case 'edited':
                   url = `/finetune/${pi.project_id}`;
+                  buttonName = 'Fine Tune'
                   break;
                 case 'finetuning':
                   url = `/status/${pi.project_id}`
+                  buttonName = 'Status'
                   break;
               }
               return (
                 <div className="Home__project" key={pi.project_id}>
                    <Link to={url}>
-                    <div className="Home__project-button">View</div>
+                    <div className="Home__project-button">{buttonName}</div>
                   </Link>
                   
                   <div className="Home__project-name">{pi.project_name}</div>
