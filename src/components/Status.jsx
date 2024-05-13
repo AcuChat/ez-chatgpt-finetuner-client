@@ -10,6 +10,9 @@ function Status() {
   const server = useSelector(state => state.projects?.server);
 
   const project = projects?.find(p => p.project_id === id);
+
+  
+
   return (
     <div className='Status'>
       <h1>Status</h1>

@@ -6,11 +6,13 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsSetProjects } from '../store/sliceProjects';
 import lodash from 'lodash';
+import { RiDeleteBinLine } from "react-icons/ri";
 
 function Home() {
   
   const dispatch = useDispatch();
   const projectsInfo = useSelector(state => state.projects);
+  const server = useSelector(state => state.server);
 
   console.log('projectsInfo', projectsInfo)
 
@@ -23,6 +25,22 @@ function Home() {
     if (test) return;
 
     dispatch(projectsSetProjects(projects));
+  }
+
+  const handleDelete = async projectId => {
+    let request = {
+      url: server + '/delete',
+      method: 'post',
+      data: {
+        projectId
+      }
+    }
+
+    try {
+      let response = await axios(request);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   useEffect(() => {
@@ -67,7 +85,9 @@ function Home() {
                   </Link>
                   
                   <div className="Home__project-name">{pi.project_name}</div>
-                  <div className="Home__project-status">{pi.status}</div>
+                  <div className="Home__action-container">
+                  <RiDeleteBinLine color='red' size={24} onClick={() => handleDelete(pi.project_id)}/>
+                  </div>
                 </div>
               )
             })}
