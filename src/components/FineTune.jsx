@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import './FineTune.scss';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import axios from 'axios';
 
 function FineTune() {
   const { id } = useParams();
+  const [fineTuning, setFineTuning] = useState(false);
+
   const projects = useSelector(state => state?.projects?.projects);
   const server = useSelector(state => state.projects?.server);
 
@@ -58,8 +60,18 @@ function FineTune() {
       }
     }
 
-    const response = await axios(request);
+    try {
+      const response = await axios(request);
 
+    } catch (err) {
+      console.error(err);
+    }
+
+  }
+
+  if (fineTuning) {
+    setFineTuning(false);
+    return <Navigate to="/" />
   }
 
   return (

@@ -6,9 +6,11 @@ import Dropzone, {useDropzone} from 'react-dropzone'
 import axios from 'axios';
 
 import settings from '../../settings.json'
+import { Navigate } from 'react-router-dom';
 
 function Create() {
   const [ file, setFile ] = useState(null);
+  const [ creating, setCreating ] = useState(false)
 
   const models = [
     'gpt-4-turbo',
@@ -54,9 +56,15 @@ function Create() {
         }
       });
       console.log(response.data);
+      setCreating(true);
     } catch (error) {
       console.error('Error uploading files: ', error);
     }
+  }
+
+  if (creating) {
+    setCreating(false);
+    return <Navigate to="/" />
   }
 
   useEffect(() => {
