@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsSetProjects } from '../store/sliceProjects';
+import lodash from 'lodash';
 
 function Home() {
   
@@ -17,13 +18,11 @@ function Home() {
     if (!projectsInfo.server) return;
     const response = await axios.get(projectsInfo.server + '/getProjects');
     const projects = response.data;
-    for (let i = 0; i < projects.length; ++i) {
-      const test = projectsInfo.projects.find(pi => pi.id === projects[i].id);
-      if (!test) {
-        dispatch(projectsSetProjects(projects));
-        break;
-      }
-    }
+    const localProjects = projectsInfo.projects;
+    const test = lodash.isEqual(projects, localProjects);
+    if (test) return;
+
+    dispatch(projectsSetProjects(projects));
   }
 
   useEffect(() => {
