@@ -21,6 +21,10 @@ const sliceProjects = createSlice({
             }
             return state;
         },
+        projectsResetNewProject: (state, action) => {
+            state.newProjects = {};
+            return state;
+        },
         projectsSetProjects: (state, action) => {
             state.projects = lodash.cloneDeep(action.payload);
             return state;
@@ -34,6 +38,6 @@ const sliceProjects = createSlice({
     }
 });
 
-export const { projectsSetServer, projectsSetNewProject, projectsSetProjects, projectsSetStatus } = sliceProjects.actions;
+export const { projectsSetServer, projectsSetNewProject, projectsSetProjects, projectsSetStatus, projectsResetNewProject } = sliceProjects.actions;
 
 export default sliceProjects.reducer;

@@ -57,12 +57,14 @@ function Create() {
       });
       console.log(response.data);
       setCreating(true);
+      console.log("creating set")
     } catch (error) {
       console.error('Error uploading files: ', error);
     }
   }
 
   if (creating) {
+    console.log('Navigating away from Creating');
     setCreating(false);
     return <Navigate to="/" />
   }

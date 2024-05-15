@@ -4,7 +4,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { projectsSetProjects } from '../store/sliceProjects';
+import { projectsResetNewProject, projectsSetProjects } from '../store/sliceProjects';
 import lodash from 'lodash';
 import { RiDeleteBinLine } from "react-icons/ri";
 
@@ -46,6 +46,7 @@ function Home() {
 
   useEffect(() => {
     getProjects();
+    dispatch(projectsResetNewProject());
 
   })
 
