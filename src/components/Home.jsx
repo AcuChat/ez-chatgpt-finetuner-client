@@ -22,6 +22,7 @@ function Home() {
     const projects = response.data;
     const localProjects = projectsInfo.projects;
     const test = lodash.isEqual(projects, localProjects);
+
     if (test) return;
 
     dispatch(projectsSetProjects(projects));
@@ -46,7 +47,10 @@ function Home() {
 
   useEffect(() => {
     getProjects();
-    dispatch(projectsResetNewProject());
+    console.log(projectsInfo)
+    const test = lodash.isEmpty(projectsInfo.newProject);
+    console.log('test', test);
+    if (!test) dispatch(projectsResetNewProject());
 
   })
 

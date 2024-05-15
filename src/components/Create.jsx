@@ -84,11 +84,11 @@ function Create() {
         value={projectInfo?.newProject?.systemPrompt ? projectInfo.newProject.systemPrompt : ''} 
         onChange={(e) => dispatch(projectsSetNewProject({systemPrompt: e.target.value}))}
       />
-      <input type="text" placeholder='Prepended User Prompt'
+      <input type="text" placeholder='Prepended User Prompt' autoComplete="new-password"
         value={projectInfo?.newProject?.userPrompt ? projectInfo.newProject.userPrompt : ''} 
         onChange={(e) => dispatch(projectsSetNewProject({userPrompt: e.target.value}))}
       />
-      <input type="password" placeholder='OpenAI API Key'
+      <input type="password" placeholder='OpenAI API Key' autoComplete="new-password"
         value={projectInfo?.newProject?.openAiKey ? projectInfo.newProject.openAiKey : ''} 
         onChange={(e) => dispatch(projectsSetNewProject({openAiKey: e.target.value}))}
       />

@@ -22,7 +22,7 @@ const sliceProjects = createSlice({
             return state;
         },
         projectsResetNewProject: (state, action) => {
-            state.newProjects = {};
+            state.newProject = {};
             return state;
         },
         projectsSetProjects: (state, action) => {
