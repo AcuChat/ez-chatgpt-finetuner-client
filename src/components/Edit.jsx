@@ -80,7 +80,10 @@ function Edit() {
     if (data === null) getInput();
   })
   
-  if (!pairsAvailable) return <Navigate to="/"/>
+  if (!pairsAvailable) {
+    console.log('FineTune Navigating to Home')
+    return <Navigate to="/"/>
+  }
 
   return (
     <div className='Edit'>
