@@ -1,0 +1,14 @@
+.Status {
+    &__info-container {
+        width: 95%;
+        max-width: 1200px;
+        display: block;
+        margin: auto;
+    }
+    &__label {
+        font-weight: 700;
+    }
+    &__value {
+        margin-bottom: .75rem;
+    }
+}

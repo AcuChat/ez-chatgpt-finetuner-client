@@ -4,7 +4,8 @@ import lodash from 'lodash';
 const initState = {
     server: '',
     newProject: {},
-    projects: []
+    projects: [],
+    fineTuneStatus: {}
 }
 
 const sliceProjects = createSlice({
@@ -34,10 +35,14 @@ const sliceProjects = createSlice({
             const project = state.projects.find(p => p.project_id === projectId);
             project.status = status;
             return state;
+        },
+        projectsSetFineTuneStatus: (state, action) => {
+            state.fineTuneStatus = action.payload;
+            return state;
         }
     }
 });
 
-export const { projectsSetServer, projectsSetNewProject, projectsSetProjects, projectsSetStatus, projectsResetNewProject } = sliceProjects.actions;
+export const { projectsSetServer, projectsSetNewProject, projectsSetProjects, projectsSetStatus, projectsResetNewProject, projectsSetFineTuneStatus } = sliceProjects.actions;
 
 export default sliceProjects.reducer;
