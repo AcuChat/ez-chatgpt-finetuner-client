@@ -63,15 +63,15 @@ function Create() {
     }
   }
 
-  if (creating) {
-    console.log('Navigating away from Creating');
-    setCreating(false);
-    return <Navigate to="/" />
-  }
-
   useEffect(() => {
     if (!projectInfo?.newProject?.model) dispatch(projectsSetNewProject({model: models[0]}))
   })
+
+
+  if (creating) {
+    console.log('Navigating away from Creating');
+    return <Navigate to="/" />
+  }
 
   return (
     <div className='Create'>
